@@ -1,0 +1,123 @@
+<html>
+<head>
+    <title>Form Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2b3a3a;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #1f2e2e;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container label {
+            color: white;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-container .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-container .input-group i {
+            background-color: #ff6600;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        .form-container .input-group input {
+            border: none;
+            padding: 10px;
+            flex: 1;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        .form-container .input-group input:focus {
+            outline: none;
+        }
+        .form-container .gender-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-container .gender-group input {
+            margin-right: 5px;
+        }
+        .form-container .terms-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-container .terms-group input {
+            margin-right: 5px;
+        }
+        .form-container button {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #e65c00;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form name="submit-to-google-sheet">
+            <div class="input-group">
+                <label for="first-name">First Name:</label>
+                <i class="fas fa-user"></i>
+                <input type="text" name="first-name" id="first-name" placeholder="First Name"required>
+            </div>
+            <div class="input-group">
+                <label for="last-name">Last Name:</label>
+                <i class="fas fa-user"></i>
+                <input type="text" name="last-name" id="last-name" placeholder="Last Name">
+            </div>
+            <div class="input-group">
+                <label for="phone">Phone No.:</label>
+                <i class="fas fa-phone"></i>
+                <input type="text" name="phone" id="phone" placeholder="Phone No." required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email ID:</label>
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" id="email" placeholder="Email Id" required>
+            </div>
+            <div class="gender-group">
+                <label>Gender:</label>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male" style="color: white;">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female" style="color: white;">Female</label>
+            </div>
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwZuKQZUnBl_vrc4vIwvhCxjBlfwsl0YqSfK2vt6lmBbD5_pD6BF2g8avLxX5ae-crYSA/exec'
+        const form = document.forms['submit-to-google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => console.log('Success!', response), window.location.href ="https://drive.google.com/file/d/1HxCnqUg3AwmGfZ4oymQR-veKXoXmI67I/view?usp=sharing ")
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>      
+</body>
+</html>
